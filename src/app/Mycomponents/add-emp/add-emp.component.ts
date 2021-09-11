@@ -12,6 +12,7 @@ export class AddEmpComponent implements OnInit {
   profile = "";
   gender = "";
   salary = "";
+  date= "";
   note = "";
   day ="";
   month="";
@@ -41,25 +42,31 @@ export class AddEmpComponent implements OnInit {
   }
 
   onSubmit(){
+    this.department= []
+    this.date =""
     for (var val of ["HR", "Sales", "Finance", "Engineer", "Other"]) {
       if(this.departments.get(val)?.value){
         this.department.push(val)
       }
     }
+    this.date = this.date+ " "+ this.day+" "+this.month+" "+this.year
     const empData = {
     name: this.name,
     profilepic: this.profile,
     gender: this.gender,
     department: this.department,
-    salary: this.salary,
+    salary: this.gridsize,
+    startDate: this.date,
     note:this.note
     }
     console.log("AddedemployeeData",empData, "sal")
     this.empDataList.push(empData)
     localStorage.setItem("empDataList", JSON.stringify(this.empDataList))
   }
-
+  
+  gridsize: number = 5000;
   onInputChange(event: MatSliderChange) {
-    console.log(event.value);
+    this.gridsize = event.value ==null ? this.gridsize : event.value;
+    console.log(this.gridsize, event.value)
   }
 }

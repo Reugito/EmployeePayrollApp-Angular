@@ -11,10 +11,6 @@ const routes: Routes = [{
 {
   path: '',
   component: HomeComponent
-},
-{
-  path: 'back',
-  component: HomeComponent
 }
 ];
 

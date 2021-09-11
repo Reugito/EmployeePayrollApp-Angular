@@ -45,7 +45,7 @@ html body{
      flex-direction: column;
      min-height: calc(100vh - 80px);
      background-color: #f7f7f7;
-     padding: 30px 0 10px;
+     padding: 10px 0 10px;
      box-sizing: border-box;
  }
  
@@ -55,7 +55,7 @@ html body{
      justify-content: space-around;
      align-items: center;
      width: 100%;
-     padding-bottom: 25px;
+     padding-bottom: 0px;
      margin-left: 0%;
  }
  
@@ -92,7 +92,7 @@ html body{
  
  
  .table-main{
-     width: 80%;
+     width: 63%;
      margin: 0 auto;
      overflow: auto;
  }
@@ -100,13 +100,19 @@ html body{
  .table{
      width: 100%;
      border-collapse: separate;
-     border-spacing: 0 15px;
+     border-spacing: 0 5px;
      min-width: 800px;
  }
+ .table>:not(caption)>*>* {
+    padding: .0rem .0rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
  
  td, th{
      text-align: left;
-     padding: 5px 8px;
+     padding: 10px 8px;
  }
  
  th{
@@ -147,7 +153,7 @@ html body{
  }
  
  .dept-label {
-     background-color: #e9fea5;
+     background-color: #a5f1fe;
      border-radius: 40%;
      width: fit-content;
      padding: 1px 7px;
@@ -155,5 +161,5 @@ html body{
      font-size: 14px;
      display: inline-block;
      font-weight: 300;
-     margin-top: 14px;
+     margin-top: 23px;
  }

@@ -15,7 +15,7 @@
 <body>
     <div class="main-content">
         <div class="header-content">
-            <div class="emp-detail-text">Employee Details <div class="emp-count"></div>
+            <div class="emp-detail-text">Employee Details <div class="emp-count">{{empDataList.length}}</div>
             </div>
            <button  [routerLink]="['/addEmployee']" routerLinkActive="router-link-active" class="add-button">addEmployee</button>
         </div>
@@ -23,7 +23,7 @@
             <table id="display" class="table">
                 <tr>
                     <th></th>
-                    <th>Name</th>
+                    <th >Name</th>
                     <th>Gender</th>
                     <th>Department</th>
                     <th>Salary</th>
@@ -32,16 +32,15 @@
                 </tr>
                 <tr *ngFor= "let empData of empDataList">
                     <td>
-                        <img class="profile" alt="" src={{empData.profilepic}}>
                         
                     </td>
-                    <td>{{empData.name}}</td>
+                    <td><img class="profile" alt="" src={{empData.profilepic}}>{{empData.name}}</td>
                     <td>{{empData.gender}}</td>
-                    <td class="dept-label" >
-                        <div >{{empData.department}}</div>
+                    <td class="dept-label" *ngFor= "let dept of empData.department">
+                        <div >{{dept}}</div>
                     </td>
                     <td>{{empData.salary}}</td>
-                    <td>16 Aug 2020</td>
+                    <td>{{empData.startDate}}</td>
                     <td>
                         <img id="1" (click) = "ondelete(empData)" alt="delete" src="../assets/icons/delete-black-18dp.svg">
                         <img id="1" alt="edit"  src="../assets/icons/create-black-18dp.svg">
@@ -50,4 +49,5 @@
             </table>
         </div>
     </div>
-
+</body>
+</html>

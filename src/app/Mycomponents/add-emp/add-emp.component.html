@@ -40,18 +40,18 @@
             <label class="label text" for="department" >DepartMent</label>
             <div>
                 <section  [formGroup]="departments">
-                    <p><mat-checkbox formControlName="HR">HR</mat-checkbox></p>
-                    <p><mat-checkbox class="checkbox" formControlName="Sales">Sales</mat-checkbox></p>
-                    <p><mat-checkbox class="checkbox" formControlName="Finance">Finance</mat-checkbox></p>
-                    <p><mat-checkbox class="checkbox" formControlName="Engineer">Engineer</mat-checkbox></p>
-                    <p><mat-checkbox class="checkbox" formControlName="Other">Other</mat-checkbox></p>
-                  </section>
+                    <mat-checkbox formControlName="HR">HR</mat-checkbox>
+                    <mat-checkbox class="checkbox" formControlName="Sales" style="margin-left: 30px;">Sales</mat-checkbox>
+                    <mat-checkbox class="checkbox" formControlName="Finance" style="margin-left: 30px;">Finance</mat-checkbox>
+                    <mat-checkbox class="checkbox" formControlName="Engineer" style="margin-left: 30px;">Engineer</mat-checkbox>
+                    <mat-checkbox class="checkbox" formControlName="Other" style="margin-left: 30px;"s>Other</mat-checkbox>
+                </section>
             </div>
         </div><br>
         <div class="row-content">
             <label class="label text" for="salary">Salary</label>
-            <mat-slider (input)="onInputChange($event)" thumbLabel tickInterval="10000" min=5000 max=500000 style="width: 50%;" ></mat-slider>
-            <output class="salary-output text" for="salary">500000</output>
+            <mat-slider (input)="onInputChange($event)" [value]="gridsize" thumbLabel tickInterval="10000" min=5000 max=500000 style="width: 50%;" ></mat-slider>
+            <output class="salary-output text" for="salary">{{gridsize}}</output>
         </div><br>
         <div class="row-content">
             <label class="label text" for="startDate">Start Date</label>
@@ -115,14 +115,14 @@
         </div><br>
         <div class="row-content">
             <label class="label text" for="notes">Notes</label>
-            <input id="note" class="input" name="note"  placeholder="" style="height: 100px">
+            <input id="note" class="input" name="note" [(ngModel)]="note"  placeholder="" style="height: 100px">
         </div><br>
         <div class="buttonParent">
-            <button [routerLink]="['/back']" routerLinkActive="router-link-active" class="resetButton button cancelButton">Back</button>
-            <div class="submit-reset">
-                <button type="submit" class="button submitButton" id="submitButton" >Submit</button>
-                <button type="reset" class=" resetButton button">Reset</button>
-            </div>
+            <button [routerLink]="['']" routerLinkActive="router-link-active" class="btn btn-outline-primary">Back</button>
+            
+                <button style="margin-left: 60%;" type="submit" class="btn btn-outline-primary" id="submitButton" >Submit</button>
+                <button type="reset" class="btn btn-outline-primary">Reset</button>
+          
         </div>
     </form>
 </div>

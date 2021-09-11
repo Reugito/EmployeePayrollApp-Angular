@@ -10,6 +10,8 @@ import { AddEmpComponent } from './Mycomponents/add-emp/add-emp.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { MatSliderModule } from '@angular/material/slider';
     FormsModule,  
     ReactiveFormsModule,
     MatCheckboxModule,
-    MatSliderModule
+    MatSliderModule,
+    MatFormFieldModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

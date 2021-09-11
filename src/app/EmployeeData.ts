@@ -3,7 +3,7 @@ export class EmployeeData{
     gender?: string ;
     profilepic?: string;
     department?: string[];
-    salary?: string;
-    statDate?: string;
+    salary?: number;
+    startDate?: string;
     note?: string;
 }
