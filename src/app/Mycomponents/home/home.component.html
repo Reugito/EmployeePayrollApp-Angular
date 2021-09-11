@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,500&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <title>Employee Payroll Form</title>
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="header-content">
+            <div class="emp-detail-text">Employee Details <div class="emp-count"></div>
+            </div>
+           <button  [routerLink]="['/addEmployee']" routerLinkActive="router-link-active" class="add-button">addEmployee</button>
+        </div>
+        <div class="table-main">
+            <table id="display" class="table">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Department</th>
+                    <th>Salary</th>
+                    <th>Start Date</th>
+                    <th>Actions</th>
+                </tr>
+                <tr *ngFor= "let empData of empDataList">
+                    <td>
+                        <img class="profile" alt="" src={{empData.profilepic}}>
+                        
+                    </td>
+                    <td>{{empData.name}}</td>
+                    <td>{{empData.gender}}</td>
+                    <td class="dept-label" >
+                        <div >{{empData.department}}</div>
+                    </td>
+                    <td>{{empData.salary}}</td>
+                    <td>16 Aug 2020</td>
+                    <td>
+                        <img id="1" (click) = "ondelete(empData)" alt="delete" src="../assets/icons/delete-black-18dp.svg">
+                        <img id="1" alt="edit"  src="../assets/icons/create-black-18dp.svg">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
