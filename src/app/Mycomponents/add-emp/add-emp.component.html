@@ -39,7 +39,7 @@
         <div class="row-content">
             <label class="label text" for="department" >DepartMent</label>
             <div>
-                <section  [formGroup]="departments">
+                <section  [formGroup]="department">
                     <mat-checkbox formControlName="HR">HR</mat-checkbox>
                     <mat-checkbox class="checkbox" formControlName="Sales" style="margin-left: 30px;">Sales</mat-checkbox>
                     <mat-checkbox class="checkbox" formControlName="Finance" style="margin-left: 30px;">Finance</mat-checkbox>
@@ -50,7 +50,7 @@
         </div><br>
         <div class="row-content">
             <label class="label text" for="salary">Salary</label>
-            <mat-slider (input)="onInputChange($event)" [value]="gridsize" thumbLabel tickInterval="10000" min=5000 max=500000 style="width: 50%;" ></mat-slider>
+            <mat-slider (input)="onInputChange($event)" [value]="gridsize"  thumbLabel tickInterval="10000" min=5000 max=500000 style="width: 50%;" ></mat-slider>
             <output class="salary-output text" for="salary">{{gridsize}}</output>
         </div><br>
         <div class="row-content">

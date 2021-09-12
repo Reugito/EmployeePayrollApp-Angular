@@ -36,14 +36,14 @@
                     </td>
                     <td><img class="profile" alt="" src={{empData.profilepic}}>{{empData.name}}</td>
                     <td>{{empData.gender}}</td>
-                    <td class="dept-label" *ngFor= "let dept of empData.department">
-                        <div >{{dept}}</div>
+                    <td class="dept-label" *ngFor = "let dept of empData.department">
+                        <div>{{dept}}</div>
                     </td>
                     <td>{{empData.salary}}</td>
                     <td>{{empData.startDate}}</td>
                     <td>
                         <img id="1" (click) = "ondelete(empData)" alt="delete" src="../assets/icons/delete-black-18dp.svg">
-                        <img id="1" alt="edit"  src="../assets/icons/create-black-18dp.svg">
+                        <img id="1" alt="edit" [routerLink]="['/update', {title:empData.name}]" src="../assets/icons/create-black-18dp.svg">
                     </td>
                 </tr>
             </table>

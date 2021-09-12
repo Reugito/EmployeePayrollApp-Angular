@@ -8,6 +8,7 @@ import { EmployeeData } from 'src/app/EmployeeData';
 })
 export class HomeComponent implements OnInit {
 
+  departments = ["HR", "Sales", "Finance", "Engineer", "Other"]
   localItems: any;
   empDataList: EmployeeData[];
   constructor() { 
