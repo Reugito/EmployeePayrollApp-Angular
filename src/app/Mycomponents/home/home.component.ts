@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { EmployeeData } from 'src/app/EmployeeData';
+import { EmployeeService } from 'src/app/Myservices/employee.service';
 
 @Component({
   selector: 'app-home',
@@ -9,30 +12,29 @@ import { EmployeeData } from 'src/app/EmployeeData';
 export class HomeComponent implements OnInit {
 
   departments = ["HR", "Sales", "Finance", "Engineer", "Other"]
-  localItems: any;
-  empDataList: EmployeeData[];
-  constructor() { 
-    this.localItems = localStorage.getItem("empDataList");
-    if(this.localItems == null){
-      this.empDataList = [];
-    }
-    else{
-      this.empDataList = JSON.parse(this.localItems);
-    }
-  }
+  employees!:Observable< EmployeeData[]>;
+  cnt!:number
+  constructor(private employeeDataService: EmployeeService, private router: Router) {}
   ngOnInit(): void {
+    this.reloadData();
   }
 
-  ondelete(empData:EmployeeData){
-    const index = this.empDataList.indexOf(empData);
-    this.empDataList.splice(index, 1)
-    localStorage.setItem("empDataList", JSON.stringify(this.empDataList))
+
+  reloadData(){
+    this.employees = this.employeeDataService.getEmployeeData();
+    console.log("total emp", typeof(this.employees), "==", this.employees)
   }
 
-  update(empData:EmployeeData){
-    console.log("employeeData",empData)
-    const index = this.empDataList.indexOf(empData);
-    this.empDataList.splice(index, 1)
-    localStorage.setItem("empDataList", JSON.stringify(this.empDataList))
+  deleteEmployee(id:number){
+    this.employeeDataService.deleteEmployee(id)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.reloadData()
+      })
+  }
+
+  updateEmployee(id: number){
+    this.router.navigate(['update', id])
   }
 }

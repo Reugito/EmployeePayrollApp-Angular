@@ -8,46 +8,55 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,500&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <title>Employee Payroll Form</title>
 </head>
 
 <body>
-    <div class="main-content">
-        <div class="header-content">
-            <div class="emp-detail-text">Employee Details <div class="emp-count">{{empDataList.length}}</div>
-            </div>
-           <button  [routerLink]="['/addEmployee']" routerLinkActive="router-link-active" class="add-button">addEmployee</button>
+    <div><br>
+        <div class="container" >
+            <div class="flex-container">
+                
+                <div class="emp-detail-text">Employee Details</div>
+                
+                <div style="margin-left: 65%;" class="float-right">
+                     <button  [routerLink]="['/add']" routerLinkActive="router-link-active" class="btn btn-outline-primary ">addEmployee</button>
+                </div>
         </div>
-        <div class="table-main">
-            <table id="display" class="table">
-                <tr>
-                    <th></th>
-                    <th >Name</th>
-                    <th>Gender</th>
-                    <th>Department</th>
-                    <th>Salary</th>
-                    <th>Start Date</th>
-                    <th>Actions</th>
-                </tr>
-                <tr *ngFor= "let empData of empDataList">
-                    <td>
+        </div>
+    
+        <div class="table-responsive " style="margin-top: 1%;">
+            <table id="display" class="table table-striped  ">
+                <thead>
+                   <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">Actions</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor= "let empData of employees | async">
+                        <td><img class="profile" alt="" src={{empData.profilePic}}></td>
+                        <td>{{empData.name}}</td>
+
+                        <td>{{empData.gender}}</td>
                         
-                    </td>
-                    <td><img class="profile" alt="" src={{empData.profilepic}}>{{empData.name}}</td>
-                    <td>{{empData.gender}}</td>
-                    <td class="dept-label" *ngFor = "let dept of empData.department">
-                        <div>{{dept}}</div>
-                    </td>
-                    <td>{{empData.salary}}</td>
-                    <td>{{empData.startDate}}</td>
+                             <td style="color: rgb(0, 26, 255);" >{{empData.departments}}</td>
+   
+
+                         <td>{{empData.salary}}</td>
+
+                         <td>{{empData.startDate}}</td>
+                         
                     <td>
-                        <img id="1" (click) = "ondelete(empData)" alt="delete" src="../assets/icons/delete-black-18dp.svg">
-                        <img id="1" alt="edit" [routerLink]="['/update', {title:empData.name}]" src="../assets/icons/create-black-18dp.svg">
+                        <img id="1" (click) = "deleteEmployee(empData.employeeId)" alt="delete" src="../assets/icons/delete-black-18dp.svg" width="25px" >
+                        <img id="1" alt="edit" (click)= "updateEmployee(empData.employeeId)" src="../assets/icons/create-black-18dp.svg" width="25px">
                     </td>
                 </tr>
+            </tbody>
             </table>
         </div>
     </div>
+    
 </body>
 </html>

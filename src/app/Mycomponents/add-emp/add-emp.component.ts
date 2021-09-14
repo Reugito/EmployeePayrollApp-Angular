@@ -3,27 +3,21 @@ import { EmployeeData } from 'src/app/EmployeeData';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider/slider';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { EmployeeService } from 'src/app/employeeservice/employee.service';
+import { EmployeeService } from 'src/app/Myservices/employee.service';
+
 @Component({
   selector: 'app-add-emp',
   templateUrl: './add-emp.component.html',
   styleUrls: ['./add-emp.component.css'],
 })
 export class AddEmpComponent implements OnInit {
-  name:any;
-  profile:any;
-  gender:any;
-  date:any;
-  note:any;
-  day ="";
-  month="";
-  year=""
-  @Output() empAdd: EventEmitter<EmployeeData> = new EventEmitter();
-  localItems: any;
-  empDataList: EmployeeData[];
-  department: FormGroup;
   
-  constructor(fb: FormBuilder, private router:ActivatedRoute, private empService: EmployeeService) {
+  day="";
+  month =""
+  year = ""
+  employee: EmployeeData = new EmployeeData();
+  department: FormGroup;
+  constructor(fb: FormBuilder, private router:ActivatedRoute,private route: Router,private empService: EmployeeService){
     this.department = fb.group({
       HR: false,
       Sales: false,
@@ -31,79 +25,83 @@ export class AddEmpComponent implements OnInit {
       Engineer: false,
       Other: false
     });
-    this.localItems = localStorage.getItem("empDataList");
-    if(this.localItems == null){
-      this.empDataList = [];
-    }
-    else{
-      this.empDataList = JSON.parse(this.localItems);
+  }
+  
+  date: any;
+  id: any
+  ngOnInit(): void {
+    this.id = this.router.snapshot.paramMap.get('id')
+    if(this.id != null){
+      this.newEmployee()
+      this.empService.getEmployee(this.id)
+      
+      .subscribe(empData => {
+        console.log("before update", empData)
+        this.employee = empData;
+        this.department.setValue({
+          HR:empData.departments?.includes("HR"),
+          Sales:empData.departments?.includes("Sales"),
+          Finance:empData.departments?.includes("Finance"),
+          Engineer:empData.departments?.includes("Engineer"),
+          Other:empData.departments?.includes("Other")
+        })
+        this.date = empData.startDate?.split("-")
+        this.day = this.date[2]
+        this.month = this.date[1]
+        this.year = this.date[0]
+        console.log("date", this.date)
+      })
+
     }
   }
-  index = -1
-  data?:any
-  ngOnInit(): void {
-    this.data = this.router.snapshot.paramMap.get('title') 
-    if(this.data == null){
-      return
-    }
-    else{
-      
-      this.empDataList.forEach(ele => {
-      if(ele.name == this.data){
-        this.index = this.empDataList.indexOf(ele)
-      }
-    else{
-      return
-    }})
-    const empData = this.empDataList[this.index]
-    console.log("index",this.index)
-    this.name = empData.name
-    this.gender = empData.gender
-    this.profile = empData.profilepic
-    this.gridsize = empData.salary
-    this.department.setValue({
-      HR:empData.department?.includes("HR"),
-      Sales:empData.department?.includes("Sales"),
-      Finance:empData.department?.includes("Finance"),
-      Engineer:empData.department?.includes("Engineer"),
-      Other:empData.department?.includes("Other")
-    })
-    this.note = empData.note
-    this.date = empData.startDate?.split(" ")
-    this.day = this.date[1]
-    this.month = this.date[2]
-    this.year = this.date[3]
-    }
+
+  newEmployee(): void{
+    this.employee = new EmployeeData();
   }
 
   departments:any
-  onSubmit(){
-    this.date=""
+  save() {
     this.departments = []
-    this.date = this.date+ " "+ this.day+" "+this.month+" "+this.year
     for(let i of [ "HR","Sales", "Finance","Engineer","Other"]){
       if(this.department.get(i)?.value){
-        this.departments.push(i)
-      }
+        this.departments.push(i)}
     }
-    const empData = {
-    name: this.name,
-    profilepic: this.profile,
-    gender: this.gender,
-    department:this.departments,
-    salary: this.gridsize,
-    startDate: this.date,
-    note:this.note
+
+    this.employee.departments = this.departments
+    this.employee.startDate = this.day+ "-"+this.month+ "-"+ this.year
+    console.log(this.employee.startDate)
+    console.log("employee",this.employee)
+
+    if(this.id == null){
+    this.empService.createEmployee(this.employee)
+    .subscribe(data => console.log("Data", data))
+    this.employee = new EmployeeData();
+    }else{
+      this.onUpdate();
     }
-    console.log("AddedemployeeData",empData, this.index),
-    (this.index != -1) ? this.empDataList[this.index]= empData : this.empDataList.push(empData)
-    this.empService.addEmployeePayrollData(this.empDataList[this.index])
-	localStorage.setItem("empDataList", JSON.stringify(this.empDataList))
+    this.gotoList();
   }
 
-  gridsize:any;
+  onSubmit(){
+    this.save() 
+  }
+
+  onUpdate(){
+    console.log("updated", this.employee)
+    this.empService.updateEmployee(this.id, this.employee)
+    .subscribe(data => console.log("updated",data))
+    this.employee = new EmployeeData();
+    this.gotoList();
+  }
+  gotoList() {
+    setTimeout(() => {
+      this.route.navigate([''])
+    }, 2000);
+    
+  }
+
   onInputChange(event: MatSliderChange) {
-    this.gridsize = event.value ==null ? this.gridsize : event.value;
-    console.log(this.gridsize, event.value)
+    this.employee.salary = event.value ==null ? this.employee.salary : event.value;
+    console.log(this.employee.salary, event.value)
   }
 }

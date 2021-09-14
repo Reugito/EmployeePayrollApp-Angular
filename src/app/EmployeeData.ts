@@ -1,11 +1,12 @@
 import { FormGroup } from "@angular/forms";
 
 export class EmployeeData{
-    name?: string ;
-    gender?: string ;
-    profilepic?: string;
-    department?: string[];
-    salary?: number;
-    startDate?: string;
-    note?: string;
+    employeeId!: number
+    name!: string ;
+    gender!: string ;
+    profilePic!: string;
+    departments!: string[];
+    salary!: number;
+    startDate!: string;
+    note!: string;
 }

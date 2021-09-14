@@ -4,7 +4,7 @@ import { AddEmpComponent } from './Mycomponents/add-emp/add-emp.component';
 import { HomeComponent } from './Mycomponents/home/home.component';
 
 const routes: Routes = [{
-  path:'addEmployee',
+  path:'add',
   component: AddEmpComponent
 },
 {
@@ -12,7 +12,7 @@ const routes: Routes = [{
   component: HomeComponent
 },
 {
-path:'update',
+path:'update/:id',
 component: AddEmpComponent
 }
 ];

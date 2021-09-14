@@ -12,6 +12,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatCheckboxModule,
     MatSliderModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

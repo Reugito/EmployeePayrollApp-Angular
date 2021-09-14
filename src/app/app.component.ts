@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmployeeData } from './EmployeeData';
-import { EmployeeService } from './employeeservice/employee.service';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +12,8 @@ export class AppComponent implements OnInit
 	title = 'EmployeePayrollApp';
 	empData?: EmployeeData[];
 	
-	constructor(private router: Router, private empService: EmployeeService)
+	constructor(private router: Router)
 	 {}
-	
-	getEmployeePayrollData()
-	{
-		this.empService.getEmployeePayrollData()
-		.subscribe( data => {
-			this.empData = data;
-		});
-	}
 	
 	addEmployeePayrollData(): void 
 	{
@@ -37,8 +28,5 @@ export class AppComponent implements OnInit
 	}
 
   ngOnInit(): void {
-	this.router.events.subscribe(value => {
-		this.getEmployeePayrollData();
-	})
   }
 }

@@ -1,28 +1,28 @@
 <div id="formId" class="form-content">
     <form class="form" (ngSubmit)="onSubmit()">
         <div class="form-head">Employee Payroll form</div>
-        <div class="row-content">
+        <div class="row-content" >
             <label class="label text" for="name">Name</label>
-            <input class="input" type="text" id="name" name="name" [(ngModel)]="name" placeholder="Your name.." required>
+            <input class="input" type="text" id="name" name="name" [(ngModel)]="employee.name" placeholder="Your name.." required>
         </div><br>
 
         <div class="row-content">
             <label class="label text" for="profile">Profile image</label>
             <div class="profile-radio-content">
                 <label>
-                    <input type="radio" id="profile1" name="profile" [(ngModel)]= "profile" value="./assets/profile-images/Ellipse -3.png">
+                    <input type="radio" id="profile1" name="profile" [(ngModel)]= "employee.profilePic" value="./assets/profile-images/Ellipse -3.png">
                     <img class="profile" id="image1" src="./assets/profile-images/Ellipse -3.png">
                 </label>
                 <label style="margin-left: 20px;">
-                    <input type="radio" id="profile2" name="profile" [(ngModel)]= "profile" value="./assets/profile-images/Ellipse 1.png">
+                    <input type="radio" id="profile2" name="profile" [(ngModel)]= "employee.profilePic" value="./assets/profile-images/Ellipse 1.png">
                     <img class="profile" id="image2" src="./assets/profile-images/Ellipse 1.png">
                 </label>
                 <label style="margin-left: 20px;">
-                    <input type="radio" id="profile3" name="profile" [(ngModel)]= "profile" value="./assets/profile-images/Ellipse -8.png">
+                    <input type="radio" id="profile3" name="profile" [(ngModel)]= "employee.profilePic" value="./assets/profile-images/Ellipse -8.png">
                     <img class="profile" id="image3" src="./assets/profile-images/Ellipse -8.png">
                 </label>
                 <label style="margin-left: 20px;">
-                    <input type="radio" id="profile4" name="profile" [(ngModel)]= "profile" value="./assets/profile-images/Ellipse -7.png"s>
+                    <input type="radio" id="profile4" name="profile" [(ngModel)]= "employee.profilePic" value="./assets/profile-images/Ellipse -7.png"s>
                     <img class="profile" id="image4" src="./assets/profile-images/Ellipse -7.png">
                 </label>
             </div>
@@ -30,9 +30,9 @@
         <div class="row-content">
             <label class="label text" for="gender">Gender</label>
             <div>
-                <input type="radio" id="male" name="gender" [(ngModel)]= "gender" value="male">
+                <input type="radio" id="male" name="gender" [(ngModel)]= "employee.gender" value="male">
                 <label class="text" for="male">male</label>
-                <input type="radio" id="female" name="gender" [(ngModel)]= "gender" value="female" style="margin-left: 30px;">
+                <input type="radio" id="female" name="gender" [(ngModel)]= "employee.gender" value="female" style="margin-left: 30px;">
                 <label class="text" for="female">female</label>
             </div>
         </div><br>
@@ -50,22 +50,22 @@
         </div><br>
         <div class="row-content">
             <label class="label text" for="salary">Salary</label>
-            <mat-slider (input)="onInputChange($event)" [value]="gridsize"  thumbLabel tickInterval="10000" min=5000 max=500000 style="width: 50%;" ></mat-slider>
-            <output class="salary-output text" for="salary">{{gridsize}}</output>
+            <mat-slider (input)="onInputChange($event)" [value]="employee.salary"  thumbLabel tickInterval="10000" min=5000 max=500000 style="width: 50%;" ></mat-slider>
+            <output class="salary-output text" for="salary">{{employee.salary}}</output>
         </div><br>
         <div class="row-content">
             <label class="label text" for="startDate">Start Date</label>
             <div>
                 <select id="day" name="Day" [(ngModel)] = "day" >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
+                    <option value="01">1</option>
+                    <option value="02">2</option>
+                    <option value="03">3</option>
+                    <option value="04">4</option>
+                    <option value="05">5</option>
+                    <option value="06">6</option>
+                    <option value="07">7</option>
+                    <option value="08">8</option>
+                    <option value="09">9</option>
                     <option value="10">10</option>
                     <option value="11">11</option>
                     <option value="12">12</option>
@@ -90,18 +90,18 @@
                     <option value="31">31</option>
                 </select>
                 <select id="month" name="Month" [(ngModel)] ="month" style="margin-left: 10px;">
-                    <option value="Jan">January</option>
-                    <option value="Feb">Febuary</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="Aug">August</option>
-                    <option value="Sept">September</option>
-                    <option value="Oct">Octomber</option>
-                    <option value="Nov">November</option>
-                    <option value="Dec">December</option>
+                    <option value="01">January</option>
+                    <option value="02">Febuary</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">Octomber</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
                 </select>
                 <select id="year" name="Year" [(ngModel)] ="year" style="margin-left: 10px;">
                     <option value="2020">2020</option>
@@ -115,7 +115,7 @@
         </div><br>
         <div class="row-content">
             <label class="label text" for="notes">Notes</label>
-            <input id="note" class="input" name="note" [(ngModel)]="note"  placeholder="" style="height: 100px">
+            <input id="note" class="input" name="note" [(ngModel)]="employee.note"  placeholder="" style="height: 100px">
         </div><br>
         <div class="buttonParent">
             <button [routerLink]="['']" routerLinkActive="router-link-active" class="btn btn-outline-primary">Back</button>
